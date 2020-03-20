@@ -4,10 +4,12 @@ const mongoose = require('mongoose');
 const Article = require('./models/article');
 const methodOverride = require('method-override');
 
+require('dotenv').config();
+
 const app = express();
 
 mongoose.connect(
-  'mongodb+srv://<user>:<password>@cluster0-rtpi7.mongodb.net/test?retryWrites=true&w=majority',
+  `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0-rtpi7.mongodb.net/test?retryWrites=true&w=majority`,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -30,4 +32,4 @@ app.get('/', async (req, res) => {
 
 app.use('/articles', articleRouter);
 
-app.listen(process.env.PORT || 3000);
+app.listen(3000);
